@@ -50,9 +50,8 @@ if __name__ == '__main__':
                 target_dir = f'../raw_data/{prompt_type}/{args.model}/{position}/{target_group}'
                 os.makedirs(target_dir, exist_ok=True)
                 existing_files = os.listdir(target_dir)
-                prompt: str = prompt_set[prompt_type][position]
-                formatted_prompt = prompt.format(target_group)
-                user_msg = formatted_prompt
+                raw_prompt: str = prompt_set[prompt_type][position]
+                formatted_prompt = raw_prompt.format(target_group)
 
                 for idx in range(30):
                     if f'{idx}.json' in existing_files:
@@ -61,7 +60,7 @@ if __name__ == '__main__':
                         try:
                             ChatGPT_generation(target_dir=target_dir,
                                                idx=idx,
-                                               prompt=prompt,
+                                               prompt=formatted_prompt,
                                                max_tokens=200)
                             print(f'SUCCESS: {target_dir}/{idx}.json')
                         except Exception as e:
