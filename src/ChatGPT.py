@@ -22,10 +22,10 @@ def data_store(data: dict, target_dir: str, idx: int) -> None:
         ujson.dump(data, f, ensure_ascii=False, indent=2)
 
 
-def ChatGPT_generation(target_dir: str, idx: int, user_msg: str,
+def ChatGPT_generation(target_dir: str, idx: int, prompt: str,
                        max_tokens: int) -> None:
     messages = []
-    user_msg = {'role': 'user', 'content': f'''{user_msg}'''}
+    user_msg = {'role': 'user', 'content': f'''{prompt}'''}
     messages.append(user_msg)
     completion = openai.ChatCompletion.create(model="gpt-3.5-turbo-0613",
                                               temperature=1.0,
@@ -33,7 +33,7 @@ def ChatGPT_generation(target_dir: str, idx: int, user_msg: str,
                                               messages=messages,
                                               max_tokens=max_tokens)
     answer = {}
-    answer['context'] = user_msg
+    answer['context'] = prompt
     answer['response'] = (
         completion['choices'][0]['message']['content']).strip()
 
@@ -61,7 +61,7 @@ if __name__ == '__main__':
                         try:
                             ChatGPT_generation(target_dir=target_dir,
                                                idx=idx,
-                                               user_msg=user_msg,
+                                               prompt=prompt,
                                                max_tokens=200)
                             print(f'SUCCESS: {target_dir}/{idx}.json')
                         except Exception as e:
