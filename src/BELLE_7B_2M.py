@@ -21,7 +21,7 @@ def torch_gc():
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--prompt_type', default='P1', type=str)
+    parser.add_argument('--prompt_type', default=None, type=str)
     parser.add_argument('--model', default='BELLE-7B-2M', type=str)
     args = parser.parse_args()
 
@@ -37,12 +37,13 @@ model = AutoModelForCausalLM.from_pretrained(f'BelleGroup/{args.model}',
 model.eval()
 
 
-def data_store(completion: dict, target_dir: str, idx: int) -> None:
+def data_store(data: dict, target_dir: str, idx: int) -> None:
     with open(f'{target_dir}/{idx}.json', 'w', encoding='utf-8') as f:
-        ujson.dump(completion, f, ensure_ascii=False, indent=2)
+        ujson.dump(data, f, ensure_ascii=False, indent=2)
 
 
-def belle_7B_2M_generation(prompt: str, idx: int, target_dir: str) -> None:
+def belle_7B_2M_generation(prompt: str, idx: int, target_dir: str,
+                           context: str) -> None:
     inputs = tokenizer(prompt, return_tensors='pt')
     input_length = len(inputs['input_ids'][0])
     inputs = inputs.to(CUDA_DEVICE)
@@ -57,30 +58,37 @@ def belle_7B_2M_generation(prompt: str, idx: int, target_dir: str) -> None:
     response = tokenizer.decode(pred.cpu()[0][input_length:],
                                 skip_special_tokens=True)
     answer = {}
-    answer['context'] = prompt
+    answer['context'] = context
     answer['response'] = response
 
     torch_gc()
-    data_store(completion=answer, target_dir=target_dir, idx=idx)
+    data_store(data=answer, target_dir=target_dir, idx=idx)
 
 
 if __name__ == '__main__':
-    for position in prompt_set[args.prompt_type].keys():
-        for target_group in target_group_in_hate_speech:
+    if args.prompt_type is None:
+        prompt_types = prompt_set.keys()
+    else:
+        prompt_types = [args.prompt_type]
 
-            target_dir = f'../raw_data/{args.prompt_type}/{args.model}/{position}/{target_group}'
-            os.makedirs(target_dir, exist_ok=True)
-            existing_files = os.listdir(target_dir)
-            prompt: str = prompt_set[args.prompt_type][position]
-            formatted_prompt = prompt.format(target_group)
+    for prompt_type in prompt_types:
+        for position in prompt_set[prompt_type].keys():
+            for target_group in target_group_in_hate_speech:
 
-            user_prompt = 'Human: ' + formatted_prompt + '\n\nAssistant:'
+                target_dir = f'../raw_data/{prompt_type}/{args.model}/{position}/{target_group}'
+                os.makedirs(target_dir, exist_ok=True)
+                existing_files = os.listdir(target_dir)
+                prompt: str = prompt_set[prompt_type][position]
+                formatted_prompt = prompt.format(target_group)
 
-            for idx in range(30):
-                if f'{idx}.json' in existing_files:
-                    print(f'DONE: {idx}.json')
-                else:
-                    belle_7B_2M_generation(prompt=user_prompt,
-                                           idx=idx,
-                                           target_dir=target_dir)
-                    print(f'SUCCESS: {target_dir}/{idx}.json')
+                user_prompt = 'Human: ' + formatted_prompt + '\n\nAssistant:'
+
+                for idx in range(30):
+                    if f'{idx}.json' in existing_files:
+                        print(f'DONE: {idx}.json')
+                    else:
+                        belle_7B_2M_generation(prompt=user_prompt,
+                                               idx=idx,
+                                               target_dir=target_dir,
+                                               context=formatted_prompt)
+                        print(f'SUCCESS: {target_dir}/{idx}.json')
