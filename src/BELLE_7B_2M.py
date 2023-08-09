@@ -71,7 +71,7 @@ if __name__ == '__main__':
             target_dir = f'../raw_data/{args.prompt_type}/{args.model}/{position}/{target_group}'
             os.makedirs(target_dir, exist_ok=True)
             existing_files = os.listdir(target_dir)
-            prompt: str = prompt_set[args.prompt_type]
+            prompt: str = prompt_set[args.prompt_type][position]
             formatted_prompt = prompt.format(target_group)
 
             user_prompt = 'Human: ' + formatted_prompt + '\n\nAssistant:'
