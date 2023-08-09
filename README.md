@@ -13,7 +13,7 @@ Templates for latent jailbreak prompts.
 
 ## Citation
 
-If you use the code or data in this repository, please cite the following paper:
+If you use the code or data in this repository, please cite the following paper.
 
 ```
 @misc{qiu2023latent,
