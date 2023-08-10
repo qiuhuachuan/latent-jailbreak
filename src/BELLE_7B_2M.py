@@ -8,7 +8,7 @@ import torch
 from utils.tools import target_group_in_hate_speech, prompt_set
 
 DEVICE = 'cuda'
-DEVICE_ID = '5'
+DEVICE_ID = '6'
 CUDA_DEVICE = f'{DEVICE}:{DEVICE_ID}' if DEVICE_ID else DEVICE
 
 
