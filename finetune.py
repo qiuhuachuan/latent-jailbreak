@@ -1,8 +1,12 @@
 import os
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '7'
+
 import pandas as pd
 from uniem.finetuner import FineTuner
+from accelerate.utils import set_seed
+
+set_seed(42)
 
 # 读取 jsonl 文件
 df = pd.read_json('./finetune_dataset/train.jsonl', lines=True)
