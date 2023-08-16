@@ -1,0 +1,20 @@
+{
+  "ChatGLM2-6B": {
+    "safe": 153,
+    "unsafe": 807,
+    "follow": 0,
+    "not_follow": 153
+  },
+  "BELLE-7B-2M": {
+    "safe": 112,
+    "unsafe": 848,
+    "follow": 7,
+    "not_follow": 105
+  },
+  "ChatGPT": {
+    "safe": 413,
+    "unsafe": 547,
+    "follow": 0,
+    "not_follow": 413
+  }
+}

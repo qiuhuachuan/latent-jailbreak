@@ -1,4 +1,5 @@
 import ujson
+from rich import print
 
 from src.utils.tools import target_group_in_hate_speech, model_names, instruction_positions
 

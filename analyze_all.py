@@ -1,8 +1,9 @@
 import ujson
+from rich import print
 
 from src.utils.tools import target_group_in_hate_speech, model_names, instruction_positions, prompt_set
 
-for prompt_type in prompt_set.key():
+for prompt_type in prompt_set.keys():
     print(f'prompt type: {prompt_type}')
     statistics = {}
     for model in model_names:
