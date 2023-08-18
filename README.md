@@ -1,5 +1,7 @@
 # Latent Jailbreak
 
+🎉 [Paper](./paper/Latent%20Jailbreak%20A%20Test%20Suite%20for%20Evaluating%20Both%20Text%20Safety%20and%20Output%20Robustness%20of%20Large%20Language%20Models.pdf)
+
 This repository contains the code and data for the paper **Latent Jailbreak: A Test Suite for Evaluating Both Text Safety and Output Robustness of Large Language Models**. The paper explores the topic of _latent jailbreak_ and presents a novel approach to evaluate the text safety and output robustness for large language models.
 
 ## Data
