@@ -11,6 +11,21 @@ The data used in this paper is included in the `data` directory.
 ![templates](./img/latent-jailbreak-dataset.png)
 Templates for latent jailbreak prompts.
 
+## Generate Model Responses
+
+```bash
+cd src
+python BELLE_7B_2M.py
+python ChatGLM2-6B.py
+python ChatGPT.py --api_key 'your key'
+```
+
+## Fine-Tune Model to Perform Automatic Labeling
+
+```bash
+python finetune.py
+```
+
 ## Citation
 
 If you use the code or data in this repository, please cite the following paper.
