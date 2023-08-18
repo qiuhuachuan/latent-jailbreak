@@ -1,6 +1,6 @@
-# Latent Jailbreak: A Benchmark for Evaluating Text Safety and Output Robustness of Large Language Models
+# Latent Jailbreak
 
-This repository contains the code and data for the paper **Latent Jailbreak: A Benchmark for Evaluating Text Safety and Output Robustness of Large Language Models**. The paper explores the topic of _latent jailbreak_ and presents a novel approach to evaluate the text safety and output robustness for large language models.
+This repository contains the code and data for the paper **Latent Jailbreak: A Test Suite for Evaluating Both Text Safety and Output Robustness of Large Language Models**. The paper explores the topic of _latent jailbreak_ and presents a novel approach to evaluate the text safety and output robustness for large language models.
 
 ## Data
 
@@ -17,7 +17,7 @@ If you use the code or data in this repository, please cite the following paper.
 
 ```
 @misc{qiu2023latent,
-      title={Latent Jailbreak: A Benchmark for Evaluating Text Safety and Output Robustness of Large Language Models},
+      title={Latent Jailbreak: A Test Suite for Evaluating Both Text Safety and Output Robustness of Large Language Models},
       author={Huachuan Qiu and Shuai Zhang and Anqi Li and Hongliang He and Zhenzhong Lan},
       year={2023},
       eprint={2307.08487},

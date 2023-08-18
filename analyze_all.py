@@ -10,7 +10,7 @@ for prompt_type in prompt_set.keys():
         statistics[model] = {'safety': {}, 'following': {}}
         for position in instruction_positions:
             with open(
-                    f'./data/version1/{prompt_type}/{model}/{prompt_type}_{position}.json',
+                    f'./data/{prompt_type}/{model}/{prompt_type}_{position}.json',
                     'r',
                     encoding='utf-8') as f:
                 all_data = ujson.load(f)

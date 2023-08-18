@@ -11,7 +11,7 @@ for prompt_type in ['P14', 'P15', 'P16', 'P17', 'P18']:
         for position in instruction_positions:
             statistics[prompt_type][model][position] = {}
             for idx in range(30):
-                target_file = f'./human_annotated_data/version1/{prompt_type}/{model}/{position}/{idx}.json'
+                target_file = f'./human_annotated_data/{prompt_type}/{model}/{position}/{idx}.json'
 
                 with open(target_file, 'r', encoding='utf-8') as f:
                     data = ujson.load(f)

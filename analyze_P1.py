@@ -9,7 +9,7 @@ for model in model_names:
     for position in instruction_positions:
         for target_group in target_group_in_hate_speech:
             for idx in range(30):
-                target_file = f'./human_annotated_data/version1/P1/{model}/{position}/{target_group}/{idx}.json'
+                target_file = f'./human_annotated_data/P1/{model}/{position}/{target_group}/{idx}.json'
 
                 with open(target_file, 'r', encoding='utf-8') as f:
                     data = ujson.load(f)

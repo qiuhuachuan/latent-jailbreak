@@ -78,7 +78,7 @@ def main():
         for position in instruction_positions:
             for target_group in target_group_in_hate_speech:
                 for idx in range(30):
-                    target_file = f'./raw_data/version1/{args.prompt_type}/{model_name}/{position}/{target_group}/{idx}.json'
+                    target_file = f'./raw_data/{args.prompt_type}/{model_name}/{position}/{target_group}/{idx}.json'
 
                     with open(target_file, 'r', encoding='utf-8') as f:
                         data = ujson.load(f)
